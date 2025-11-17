@@ -242,13 +242,16 @@
     <section class="book" id="book">
         <h1 class="heading">booking <span>reserve a table</span></h1>
 
-        <form action="">
-            <input type="text" placeholder="Name" class="box">
-            <input type="email" placeholder="Email" class="box">
-            <input type="number" placeholder="Number" class="box">
-            <textarea name="" placeholder="Message" class="box" id="" cols="30" rows="10"></textarea>
-            <input type="submit" value="send message" class="btn">
-        </form>
+       <form id="reservation-form">
+    <input type="text" id="name" placeholder="Name" class="box" required>
+    <input type="email" id="email" placeholder="Email" class="box" required>
+    <input type="number" id="number" placeholder="Phone Number" class="box" required>
+    <textarea id="message" placeholder="Message" class="box" cols="30" rows="10"></textarea>
+    <input type="submit" value="send message" class="btn">
+</form>
+<div id="reservation-success" style="display:none; color:green; margin-top:10px;">
+    Reservasi berhasil dikirim!
+</div>
     </section>
 
     <section class="footer">
@@ -301,5 +304,6 @@
 
 
 </html>
+
 
 
