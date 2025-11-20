@@ -60,11 +60,26 @@
     </style>
 </head>
 <body>
-    <section class="admin-dashboard">
-        <h1 class="heading">Admin <span>Reservation Dashboard</span></h1>
+    <section class="admin-dashboard" id="login-section">
+        <h1 class="heading">Admin <span>Login</span></h1>
+        <div style="max-width: 400px; margin: 0 auto; padding: 2rem; border: .2rem solid #443; border-radius: .5rem;">
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Username" class="box" style="width: 100%; padding: 1rem; margin-bottom: 1rem; font-size: 1.6rem;" required>
+                <input type="password" id="password" placeholder="Password" class="box" style="width: 100%; padding: 1rem; margin-bottom: 1rem; font-size: 1.6rem;" required>
+                <button type="submit" class="btn" style="width: 100%;">Login Masuk</button>
+            </form>
+            <p id="login-error" style="color: red; font-size: 1.4rem; margin-top: 1rem; display: none;"></p>
+        </div>
+    </section>
+
+    <section class="admin-dashboard" id="dashboard-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="heading">Admin <span>Dashboard</span></h1>
+            <button onclick="logout()" class="btn" style="background: red; color: white; border-color: red;">Logout</button>
+        </div>
 
         <div id="reservations-container" class="reservations-list">
-            <!-- Reservations will appear here -->
+            <p style="text-align: center; font-size: 1.5rem;">Memuat data...</p>
         </div>
     </section>
 
