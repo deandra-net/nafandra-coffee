@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const container = document.getElementById('reservations-container');
 
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbzOTLZTyovTfHBjLGStLQ3yBNt4Zg-7-ELTA8DHVQCbfnTnz6P1jIqMl5Pdogpz9AKA/exec");
+        const response = await fetch("https://script.google.com/macros/s/AKfycby0xHlIiS8xWFLR_Nldfrqr2D8rQ7q1z4RvCDx9HXvhaFqsWX8Q-eqX6HVt2HLEQZjj/exec");
         const data = await response.json();
 
         if (!data || data.length === 0) {
