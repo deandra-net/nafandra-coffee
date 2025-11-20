@@ -43,13 +43,13 @@ var swiper = new Swiper(".review-slider", {
     },
 });
 
-// === RESERVATION FORM (SEND TO GOOGLE SHEET) ===
+// === RESERVATION FORM ===
 document.addEventListener("DOMContentLoaded", function () {
 
     const reservationForm = document.getElementById('reservation-form');
 
     if (reservationForm) {
-        reservationForm.addEventListener('submit', async function(e) {
+        reservationForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const reservation = {
@@ -60,15 +60,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 date: new Date().toISOString()
             };
 
-            // 🔥 KIRIM DATA KE GOOGLE SHEET VIA WEB APP
-            await fetch("https://script.google.com/macros/s/AKfycby0xHlIiS8xWFLR_Nldfrqr2D8rQ7q1z4RvCDx9HXvhaFqsWX8Q-eqX6HVt2HLEQZjj/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(reservation)
-});
+            let reservations = JSON.parse(localStorage.getItem('reservations') || "[]");
+            reservations.push(reservation);
+            localStorage.setItem('reservations', JSON.stringify(reservations));
 
-
-            // Feedback ke user
             document.getElementById('reservation-success').style.display = "block";
             reservationForm.reset();
         });
