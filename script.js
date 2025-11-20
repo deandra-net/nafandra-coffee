@@ -70,3 +70,44 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+// === RESERVATION FORM UPDATE ===
+document.addEventListener("DOMContentLoaded", function () {
+
+    const reservationForm = document.getElementById('reservation-form');
+
+    if (reservationForm) {
+        reservationForm.addEventListener('submit', async function(e) { // Tambahkan async
+            e.preventDefault();
+
+            const reservationData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                number: document.getElementById('number').value,
+                message: document.getElementById('message').value
+                // Date akan dihandle oleh Golang Server biar akurat
+            };
+
+            try {
+                // Kirim ke Golang Backend
+                const response = await fetch('/api/booking', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reservationData)
+                });
+
+                if (response.ok) {
+                    document.getElementById('reservation-success').style.display = "block";
+                    reservationForm.reset();
+                } else {
+                    alert("Gagal mengirim reservasi. Coba lagi.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Terjadi kesalahan koneksi.");
+            }
+        });
+    }
+});
