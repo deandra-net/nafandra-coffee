@@ -4,6 +4,60 @@
     <meta charset="UTF-8">
     <title>Admin Dashboard - Reservations</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Container list */
+        .reservations-list {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        /* Table style */
+        .reservations-list table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .reservations-list th {
+            background: #0099ff;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Rows */
+        .reservations-list td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* Alternate row shading */
+        .reservations-list tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Hover */
+        .reservations-list tr:hover {
+            background: #eaf6ff;
+            transition: 0.2s ease;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 600px) {
+            .reservations-list th,
+            .reservations-list td {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <section class="admin-dashboard">
