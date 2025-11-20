@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             // 🔥 KIRIM DATA KE GOOGLE SHEET VIA WEB APP
-            await fetch("https://script.google.com/macros/s/AKfycbzOTLZTyovTfHBjLGStLQ3yBNt4Zg-7-ELTA8DHVQCbfnTnz6P1jIqMl5Pdogpz9AKA/exec", {
+            await fetch("https://script.google.com/macros/s/AKfycby0xHlIiS8xWFLR_Nldfrqr2D8rQ7q1z4RvCDx9HXvhaFqsWX8Q-eqX6HVt2HLEQZjj/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(reservation)
