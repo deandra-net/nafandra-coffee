@@ -1,104 +1,72 @@
-const loginSection = document.getElementById('login-section');
-const dashboardSection = document.getElementById('dashboard-section');
-const loginForm = document.getElementById('login-form');
-const errorMsg = document.getElementById('login-error');
+// === MENU BUTTON ===
+let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.navbar');
 
-// Saat halaman dibuka, coba load data. Jika gagal (401), tampilkan login.
-document.addEventListener("DOMContentLoaded", function() {
-    loadReservations(); 
+menu.onclick = () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+};
+
+window.onscroll = () => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+};
+
+// === IMAGE SLIDER (home image change) ===
+document.querySelectorAll('.image-slider img').forEach(images => {
+    images.onclick = () => {
+        var src = images.getAttribute('src');
+        document.querySelector('.main-home-image').src = src;
+    };
 });
 
-// Handle Submit Login
-loginForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+// === SWIPER REVIEW SLIDER ===
+var swiper = new Swiper(".review-slider", {
+    spaceBetween: 20,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    loop: true,
+    grabCursor: true,
+    autoplay: {
+        delay: 7500,
+        disableOnInteraction: false,
+    },
+    breakpoints: {
+        0: {
+            slidesPerView: 1
+        },
+        768: {
+            slidesPerView: 2
+        }
+    },
+});
 
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+// === RESERVATION FORM ===
+document.addEventListener("DOMContentLoaded", function () {
+
+    const reservationForm = document.getElementById('reservation-form');
+
+    if (reservationForm) {
+        reservationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const reservation = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                number: document.getElementById('number').value,
+                message: document.getElementById('message').value,
+                date: new Date().toISOString()
+            };
+
+            let reservations = JSON.parse(localStorage.getItem('reservations') || "[]");
+            reservations.push(reservation);
+            localStorage.setItem('reservations', JSON.stringify(reservations));
+
+            document.getElementById('reservation-success').style.display = "block";
+            reservationForm.reset();
         });
-
-        if (response.ok) {
-            // Login Sukses
-            loginSection.style.display = 'none';
-            dashboardSection.style.display = 'block';
-            loadReservations(); // Ambil data
-        } else {
-            // Login Gagal
-            errorMsg.textContent = "Username atau Password salah!";
-            errorMsg.style.display = "block";
-        }
-    } catch (error) {
-        console.error("Error:", error);
     }
+
 });
-
-// Fungsi Mengambil Data dari Golang
-async function loadReservations() {
-    try {
-        const response = await fetch('/api/admin/reservations');
-        
-        if (response.status === 401) {
-            // Jika server bilang "Unauthorized", tampilkan form login
-            loginSection.style.display = 'block';
-            dashboardSection.style.display = 'none';
-            return;
-        }
-
-        const reservations = await response.json();
-        
-        // Jika sudah login, tampilkan dashboard
-        loginSection.style.display = 'none';
-        dashboardSection.style.display = 'block';
-
-        renderTable(reservations);
-
-    } catch (error) {
-        console.log("Belum login atau server error");
-    }
-}
-
-// Fungsi Render Tabel (Sama seperti logikamu sebelumnya, tapi data dari Server)
-function renderTable(reservations) {
-    const container = document.getElementById('reservations-container');
-    
-    if (!reservations || reservations.length === 0) {
-        container.innerHTML = "<p style='font-size:1.5rem; text-align:center;'>Tidak ada reservasi ditemukan.</p>";
-        return;
-    }
-
-    let html = `<table border="1" cellpadding="10">
-        <tr>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>Nomor HP</th>
-            <th>Pesan</th>
-            <th>Tanggal</th>
-        </tr>`;
-        
-    reservations.forEach(res => {
-        // Format tanggal dari Go ISO String ke format lokal
-        const dateObj = new Date(res.date); 
-        const dateStr = dateObj.toLocaleDateString() + " " + dateObj.toLocaleTimeString();
-
-        html += `<tr>
-            <td>${res.name}</td>
-            <td>${res.email}</td>
-            <td>${res.number}</td>
-            <td>${res.message}</td>
-            <td>${dateStr}</td>
-        </tr>`;
-    });
-    html += "</table>";
-    container.innerHTML = html;
-}
-
-function logout() {
-    // Cara mudah logout: hapus cookie dengan set expired date ke masa lalu
-    document.cookie = "session_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.reload();
-}
