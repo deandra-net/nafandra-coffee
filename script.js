@@ -62,9 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 🔥 KIRIM DATA KE GOOGLE SHEET VIA WEB APP
             await fetch("https://script.google.com/macros/s/AKfycbzOTLZTyovTfHBjLGStLQ3yBNt4Zg-7-ELTA8DHVQCbfnTnz6P1jIqMl5Pdogpz9AKA/exec", {
-                method: "POST",
-                body: JSON.stringify(reservation)
-            });
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reservation)
+});
+
 
             // Feedback ke user
             document.getElementById('reservation-success').style.display = "block";
