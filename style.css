@@ -555,3 +555,34 @@ section {
         width: 100%;
     }
 }
+/* --- TOAST NOTIFICATION (Pesan Sukses Keren) --- */
+#toast-box {
+    visibility: hidden; /* Tersembunyi defaultnya */
+    min-width: 250px;
+    background-color: var(--main-color); /* Warna tema kopi */
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000; /* Supaya di atas segalanya */
+    left: 50%;
+    bottom: 30px; /* Muncul di bawah layar */
+    font-size: 1.6rem;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 1px solid #fff;
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+#toast-box.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px; /* Efek naik sedikit saat muncul */
+}
+
+#toast-box i {
+    margin-right: 10px;
+    font-size: 2rem;
+}
