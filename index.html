@@ -236,20 +236,28 @@
         </div>
     </section>
 
-    <section class="book" id="book">
+ <section class="book" id="book">
         <h1 class="heading">booking <span>reserve a table</span></h1>
 
-       <form id="reservation-form">
-    <input type="text" id="name" placeholder="Name" class="box" required>
-    <input type="email" id="email" placeholder="Email" class="box" required>
-    <input type="number" id="number" placeholder="Phone Number" class="box" required>
-    <textarea id="message" placeholder="Message" class="box" cols="30" rows="10"></textarea>
-    <input type="submit" value="send message" class="btn">
-</form>
-<div id="reservation-success" style="display:none; color:green; margin-top:10px;">
-    Reservasi berhasil dikirim!
-</div>
-    </section>
+        <form id="reservation-form">
+            <input type="text" id="name" placeholder="Name" class="box" required>
+            <input type="email" id="email" placeholder="Email" class="box" required>
+            <input type="number" id="number" placeholder="Phone Number" class="box" required>
+            <textarea id="message" placeholder="Message" class="box" cols="30" rows="10"></textarea>
+            <input type="submit" value="send message" class="btn">
+        </form>
+
+        <div class="check-status-container" style="margin-top: 4rem; text-align: center; background: #fff; padding: 3rem; border-radius: .5rem; border: .2rem solid #443;">
+            <h3 style="font-size: 2.5rem; color: #443; margin-bottom: 1rem;">Sudah Booking? Cek Statusmu</h3>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <input type="email" id="check-email-input" placeholder="Masukkan Email Kamu" class="box" style="border: .2rem solid #443; padding: 1rem; width: 300px; font-size: 1.6rem; margin:0;">
+                <button onclick="checkStatus()" class="btn" style="margin: 0;">Cek Sekarang</button>
+            </div>
+            <div id="status-result" style="margin-top: 2rem; display: none; padding: 1.5rem; border-radius: .5rem; font-size: 1.8rem;"></div>
+        </div>
+
+        <div id="toast-box"><i class="fas fa-check-circle"></i> Pesan Terkirim!</div>
+</section>
 
     <section class="footer">
         <div class="box-container">
